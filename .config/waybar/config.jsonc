@@ -1,0 +1,49 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": [
+    {
+      "name": "clock",
+      "format": "{:%a %d %b %H:%M}",
+      "on-click": "gnome-calendar"
+    }
+  ],
+  "modules-right": [
+    {
+      "name": "custom/network",
+      "interval": 5,
+      "exec": "~/.config/waybar/scripts/network.sh",
+      "on-click": "nm-applet"
+    },
+    {
+      "name": "custom/volume",
+      "interval": 2,
+      "exec": "~/.config/waybar/scripts/volume.sh",
+      "on-click": "~/.config/waybar/scripts/volume.sh open",
+      "on-click-right": "~/.config/waybar/scripts/volume.sh toggle"
+    },
+    {
+      "name": "custom/battery",
+      "interval": 30,
+      "exec": "~/.config/waybar/scripts/battery.sh",
+      "on-click": "gnome-control-center power"
+    },
+    {
+      "name": "custom/clipboard",
+      "interval": 2,
+      "exec": "~/.config/waybar/scripts/clipboard.sh"
+    },
+    {
+      "name": "custom/updates",
+      "interval": 1800,
+      "exec": "~/.config/waybar/scripts/updates.sh",
+      "tooltip": false,
+      "on-click": "kitty -e sudo pacman -Syu"
+    },
+    "tray"
+  ],
+  "clock": {
+    "format": "{:%a %d %b %H:%M}"
+  }
+}
