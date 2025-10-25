@@ -1,0 +1,121 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 0,
+  "markup": true,
+  "exclusive": true,
+  "passthrough": false,
+  "on-window-fullscreen": "hide",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-right": [
+    "tray",
+    "custom/updates",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "bluetooth",
+    "custom/power"
+    // "network",
+  ],
+  "modules-center": ["clock"],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{icon}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces": {
+      "*": 3
+    }
+  },
+  "format": "[{}]",
+  "format-empty": "[X]",
+  "format-windowed": "[T]",
+  // "format-fullscreen": "[{}]",
+  "separate-outputs": true,
+  "tray": {
+    "icon-size": 12,
+    "spacing": 10,
+    "format": "[ {} ]"
+  },
+  "clock": {
+    "tooltip": false,
+    "format": "[  {:%a %d %b %I:%M %p}  ]",
+    "on-click": "~/.config/waybar/scripts/calcure.sh"
+  },
+  "backlight": {
+    "format": "[  {icon}  {percent}%   ]",
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
+  },
+  "battery": {
+    "format": "[   {icon}  {capacity}%   ]",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "[  󱟢  ]",
+    "interval": 60,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "tooltip": true
+  },
+  "network": {
+    "format-wifi": "[     {signalStrength}%  ]",
+    "format-ethernet": "[     {ipaddr}/{cidr}  ]",
+    "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "[  󱚺  {bandwidthUpBits}   󱚶  {bandwidthDownBits}  ]"
+  },
+  "bluetooth": {
+    "format": "[   {status}  ]",
+    "format-disabled": "[   Disabled  ]",
+    "format-off": "[   Off  ]",
+    "format-on": "[   On  ]",
+    "format-connected": "[   {num_connections}  ]",
+    "tooltip-format": "{controller_alias}\n{device_enumerate}",
+    "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
+    "on-click": "blueberry"
+  },
+  "pulseaudio": {
+    "format": "[  {icon}   {volume}%  ]",
+    "format-bluetooth": "[  {icon} {volume}%  ]",
+    "format-bluetooth-muted": " {icon}  {format_source}",
+    "format-muted": "[  ]",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/power": {
+    "format": "[ ⏻  ]",
+    "tooltip": false,
+    "on-click": "systemctl poweroff",
+    "on-click-right": "systemctl reboot"
+  },
+  "custom/updates": {
+    "format": "[  {} {icon}  ]",
+    "return-type": "json",
+    "format-icons": {
+      "has-updates": "󰻌",
+      "updated": "󰕥"
+    },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300"
+  }
+}

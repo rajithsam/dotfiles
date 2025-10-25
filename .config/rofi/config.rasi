@@ -1,7 +1,0 @@
-* {
-    background: #282828;
-    foreground: #ebdbb2;
-    border-color: #d79921;
-    selected: #b16286;
-    font: "JetBrains Mono 12";
-}

@@ -1,0 +1,279 @@
+/*
+ * Waybar Gruvbox-Themed Configuration
+ * Optimized and Aligned
+ */
+
+/* ========================================================================= */
+/* Global Reset and Base Styles */
+/* ========================================================================= */
+
+* {
+  /* Font and Size Base */
+  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 9px;
+
+  /* Reset Margins/Paddings */
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+
+  /* Reset Borders/Radii */
+  border: none;
+  border-radius: 3px;
+
+  /* Global Margin for most modules (except window/workspaces) */
+  margin: 0.2em 0.3em;
+
+  /* Transitions */
+  transition-property: background-color, color; /* Added color for smoother transitions */
+  transition-duration: 0.5s;
+}
+
+/* ========================================================================= */
+/* Waybar Window */
+/* ========================================================================= */
+
+window#waybar {
+  /* Gruvbox Base03 (darker) with opacity */
+  background-color: rgba(40, 40, 40, 0.7);
+  /* Gruvbox Foreground */
+  color: #ebdbb2;
+  /* Window-specific resets */
+  border-radius: 0px;
+  margin: 0px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+window#waybar.termite {
+  /* Gruvbox Base02 */
+  background-color: #3c3836;
+}
+
+/* ========================================================================= */
+/* Window Title and Mode */
+/* ========================================================================= */
+
+#window {
+  /* Gruvbox Base01 */
+  background-color: rgba(50, 48, 47, 0.9);
+  color: #ebdbb2; /* Gruvbox Foreground */
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 14px;
+  padding: 3px 6px;
+  margin: 2px 4px; /* Consistent side margin */
+  opacity: 1;
+}
+
+#mode {
+  /* Gruvbox Blue */
+  background-color: #458588;
+  /* Highlight */
+  box-shadow: inset 0 -3px #ebdbb2;
+}
+
+/* ========================================================================= */
+/* Buttons (Generic) */
+/* ========================================================================= */
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* Remove effects on hover */
+button:hover {
+  background: inherit;
+  box-shadow: none;
+}
+
+/* ========================================================================= */
+/* Standard Modules */
+/* ========================================================================= */
+
+#clock,
+#battery,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#custom-power,
+#custom-updates,
+#tray,
+#mode {
+  /* Shared Base Styles */
+  padding: 2px 4px; /* Added 4px for side padding consistency */
+  color: #ebdbb2;
+  background-color: transparent;
+}
+
+/* ========================================================================= */
+/* Module Overrides */
+/* ========================================================================= */
+
+/* Battery */
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+#battery.critical:not(.charging) {
+  /* Gruvbox Red */
+  background-color: #fb4934;
+  color: #ebdbb2;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Network */
+#network.disconnected {
+  /* Gruvbox Red */
+  background-color: #fb4934;
+}
+
+/* Audio */
+#pulseaudio.muted {
+  /* Gruvbox Base04 (less prominent) */
+  color: #a89984;
+}
+
+#wireplumber.muted {
+  /* Gruvbox Red (prominent) */
+  background-color: #fb4934;
+}
+
+/* Custom Updates */
+#custom-updates.updates {
+  /* Gruvbox Yellow */
+  color: #fabd2f;
+}
+#custom-updates.reboot {
+  /* Gruvbox Red */
+  color: #fb4934;
+}
+#custom-updates.uptodate {
+  /* Gruvbox Green */
+  color: #b8bb26;
+}
+
+/* Custom Media */
+#custom-media {
+  min-width: 100px;
+}
+
+#custom-media.custom-vlc {
+  /* Gruvbox Orange */
+  background-color: #fe8019;
+}
+
+/* Tray */
+#tray {
+  padding: 4px 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  background-color: #eb4d4b;
+  -gtk-icon-effect: highlight;
+}
+
+/* ========================================================================= */
+/* Workspaces (Dots) */
+/* ========================================================================= */
+
+#workspaces {
+  margin: 0; /* Important for alignment */
+}
+
+#workspaces button {
+  padding: 4px;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+
+  /* Muted Gruvbox color for inactive dots (Base04/Gray) */
+  color: #a89984;
+}
+
+/* Hover state: make the dot noticeable */
+#workspaces button:hover {
+  background-color: transparent;
+  color: #ebdbb2; /* Gruvbox Foreground */
+}
+
+/* Focused (Active/Current) Workspace */
+#workspaces button.focused {
+  background-color: transparent;
+  /* Gruvbox Green */
+  color: #b8bb26;
+  box-shadow: none;
+}
+
+/* Active Workspace (visible on other monitors) */
+#workspaces button.active {
+  background-color: transparent;
+  /* Gruvbox Yellow */
+  color: #fabd2f;
+  box-shadow: none;
+}
+
+/* Urgent/Notification Workspace */
+#workspaces button.urgent {
+  background-color: transparent;
+  /* Gruvbox Red */
+  color: #fb4934;
+  box-shadow: none;
+}
+
+/* ========================================================================= */
+/* Menu (e.g., for custom-power) */
+/* ========================================================================= */
+
+menu {
+  border-radius: 8px;
+  background-color: transparent;
+  color: #ebdbb2; /* Gruvbox foreground */
+  border: 1px solid #3c3836; /* Gruvbox Base02 */
+  padding: 3px;
+  min-width: 160px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+menuitem {
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 2px 0;
+  color: #ebdbb2;
+  background: transparent;
+}
+
+menuitem:hover {
+  /* Gruvbox Base01 equivalent with less opacity is a common hover style */
+  background-color: rgba(50, 48, 47, 0.5); /* #32302f with opacity */
+  color: #ebdbb2;
+}
+
+menuitem:selected,
+menuitem.active {
+  /* Keep background transparent or use a subtle active color */
+  background-color: transparent;
+  color: #ebdbb2;
+}
